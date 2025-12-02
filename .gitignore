@@ -1,6 +1,9 @@
-data/predictions/*
-data/processed_data/*
-data/raw_data/*
+# data/predictions/*
+# data/processed_data/*
+# data/raw_data/*.parquet
+
+*.parquet
+*.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
