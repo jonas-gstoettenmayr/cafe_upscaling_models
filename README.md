@@ -12,7 +12,9 @@ Our customers (cafés and coffee and spice manufactuers) use this data to decide
 
 This Repo is split into multiple Parts:
 
-- The code for predicting future data is inside the scripts folder
+- The data directory, the processed data is fast to compute as such it is not stored but simply computed from the data in the other directories, these were included for convinience in the last commit
+- The code for predicting future data is inside the scripts folder.
+  This is supposed to be used for actuall predictions as only the config.toml file has to be changed to the desired configuration and the script executed to generate the prediction, a parquet containing a performance overview and a markdown summurising the performance
 - The code for developing the methods and models used in scripts is inside their respective folders
   - "data_ingestion_preprocessing" contains the notebooks used for processing the data
   - "models_forecast_eval" contains the notebooks for exploring, choosing and tuning our Model
@@ -35,7 +37,7 @@ We are trying to solve this problem through predicting the curiosity of customer
 
 ## The Data
 
-For the detailed version of this summary chapter see: [The Data Documentation](/docs/data_ingestion_preprocessing.mkd)
+For the detailed version of this summary chapter see: [The Data Documentation](/docs/data_ingestion_preprocessing.md)
 
 Data is the basis and lifeblood of any (AI) prediction project and as such of paramount important.
 
@@ -62,7 +64,7 @@ For external features we decided to inclulde holidays as it is only natural that
 
 ## Models
 
-For the detailed version of this summary chapter see: [The Model Documentation](/docs/data_ingestion_preprocessing.mkd)
+For the detailed version of this summary chapter see: [The Model Documentation](/docs/modelling_documentation.md)
 
 ### Model training
 
@@ -84,7 +86,7 @@ Our final model was then trained on all available data, using the parameters of 
 
 Our model was evaluated in a variety of ways.
 
-- Visualy, the often best and most accurate way
+- Visualy, the often best and most accurate way to read more about the visualisation see [The Visualisation Documentation](/docs/visualisations_documentation.md)
 - With metrics, well known metrics like MAE, MAPE, RMSE
 - Against a baseline, the future is impossible to predict as such our Model need not be perfect but better than randomness to be of use.
 

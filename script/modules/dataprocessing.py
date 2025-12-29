@@ -1,8 +1,8 @@
 """ Model for processing the Data"""
 
+from datetime import timedelta
 from typing import Tuple
 import polars as pl
-from datetime import timedelta
 
 
 def ingest(path: str) -> pl.DataFrame:
@@ -62,8 +62,10 @@ def train_test_split(df: pl.DataFrame, test_end: str = "2025-12-01", test_length
     test_start = pl.lit(test_end).str.to_date() - timedelta(test_length-1)
     return df.filter(pl.col("ds") < test_start), df.filter(pl.col("ds") >= test_start)
 
-def add_features(df: pl.DataFrame) -> Tuple[pl.DataFrame, pl.DataFrame]:
-    pass
+def add_features(df: pl.DataFrame, h:int = 31 # pylint: disable=unused-argument
+                 ) ->Tuple[pl.DataFrame, pl.DataFrame |None]:
+    """adds features to a df and returns a future df for the horizon of the featues"""
+    return df, None # the best model has no features ¯\(°_o)/¯
 
 
 def _filter_out_drink(df: pl.DataFrame, drink_name: str) -> Tuple[pl.DataFrame, pl.DataFrame]:
@@ -79,7 +81,7 @@ def _filter_out_drink(df: pl.DataFrame, drink_name: str) -> Tuple[pl.DataFrame, 
     """
     df_without_drink = df.filter(pl.col("unique_id") != drink_name)
     df_drink_only = df.filter(pl.col("unique_id") == drink_name)
-    
+
     return df_without_drink, df_drink_only
 
 def _add_drink_back(df_processed: pl.DataFrame, df_drink: pl.DataFrame) -> pl.DataFrame:
