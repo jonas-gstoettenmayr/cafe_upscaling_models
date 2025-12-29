@@ -21,7 +21,7 @@ df = data.preprocess(df, end_date=config["predictions"]["predict_from"])
 # Train test splitt and model eval
 train, test = data.train_test_split(df, config["predictions"]["predict_from"], 31)
 
-train, future_features = data.add_features(train)
+# train, future_features = data.add_features(train) # turns out no features needed
 
 model = FinalModel()
 baseline = BaseLineModel()

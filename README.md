@@ -8,6 +8,16 @@ Our mission is to predict future curiosity for café menus.
 
 Our customers (cafés and coffee and spice manufactuers) use this data to decide what to stock and which drinks become popular which time of the year and which drinks are rising in popularity and as such how they shoul modify their menus.
 
+## Structure
+
+This Repo is split into multiple Parts:
+
+- The code for predicting future data is inside the scripts folder
+- The code for developing the methods and models used in scripts is inside their respective folders
+  - "data_ingestion_preprocessing" contains the notebooks used for processing the data
+  - "models_forecast_eval" contains the notebooks for exploring, choosing and tuning our Model
+  - "visualisations" contains a notebook for different Visualisations
+
 ## The Team
 
 Data Processing and Feature engineering: Maria Helmetsberger (<s2410929013@fhooe.at>)\
@@ -75,8 +85,25 @@ Our final model was then trained on all available data, using the parameters of 
 Our model was evaluated in a variety of ways.
 
 - Visualy, the often best and most accurate way
-
-- With metrics, well known metrics like r2 score, MAE....
+- With metrics, well known metrics like MAE, MAPE, RMSE
 - Against a baseline, the future is impossible to predict as such our Model need not be perfect but better than randomness to be of use.
 
+The metrics for the test set:
+
+|    | metric   |      NHITS |   SeasonalNaive |
+|---:|:---------|-----------:|----------------:|
+|  0 | mae      | 150.933    |      171.024    |
+|  1 | mape     |   0.328873 |        0.406559 |
+|  2 | rmse     | 170.175    |      194.209    |
+
+The visualisations are in their respetive Notebooks
+
 ## Final Predicion
+
+Our final model is a NHITS model.
+
+NHITS (Neural Hierarchical Interpolation for Time Series) is a deep learning model that breaks a time series into different temporal scales to capture both long-term trends and short-term fluctuations.
+It downsamples input data at different rates across multiple stacks, forcing earlier parts of the model to focus on coarse, low-frequency patterns while later parts handle high-frequency details.
+Hierarchical interpolation techniques are used to combine these multi-scale predictions into a smooth, accurate forecast.
+
+The prediction can be viewd in either the january_prediction.parquet or january_prediction.csv.
