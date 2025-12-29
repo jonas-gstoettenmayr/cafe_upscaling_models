@@ -108,6 +108,10 @@ def cap_outliers_iqr(df, column='Views', group_by='Drink', factor=1.5):
         
         lower_bound = q1 - factor * iqr
         upper_bound = q3 + factor * iqr
+
+        #rounding it so it is a whole number (as there cannot be half clicks)
+        lower_bound = lower_bound.round(0)
+        upper_bound = upper_bound.round(0)
         
         # Cap the values
         result = result.with_columns(
@@ -126,6 +130,10 @@ def cap_outliers_percentile(df, column='Views', lower=1, upper=99):
     
     lower_bound = df[column].quantile(lower/100)
     upper_bound = df[column].quantile(upper/100)
+
+    #rounding it so it is a whole number (as there cannot be half clicks)
+    lower_bound = lower_bound.round(0)
+    upper_bound = upper_bound.round(0)
     
     return df.with_columns(
         pl.col(column).clip(lower_bound, upper_bound).alias(column)
@@ -140,6 +148,10 @@ def cap_outliers_zscore(df, column='Views', threshold=3):
     
     lower_bound = mean - threshold * std
     upper_bound = mean + threshold * std
+
+    #rounding it so it is a whole number (as there cannot be half clicks)
+    lower_bound = lower_bound.round(0)
+    upper_bound = upper_bound.round(0)
     
     return df.with_columns(
         pl.col(column).clip(lower_bound, upper_bound).alias(column)
