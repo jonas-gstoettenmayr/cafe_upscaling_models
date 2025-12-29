@@ -1,9 +1,7 @@
-# data/predictions/*
-# data/processed_data/*
+data/predictions/for_eval
+data/processed_data/*
 # data/raw_data/*.parquet
 
-*.parquet
-*.csv
 *_logs
 
 # Byte-compiled / optimized / DLL files
